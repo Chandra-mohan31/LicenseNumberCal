@@ -42,12 +42,57 @@ namespace LicenseProcessingTime
             Console.WriteLine(resultTime);
             return resultTime;
         }
+
+
+        public static void OptimisedCalculateTimeForLicenseProcessing(string your_name, int agents_available, string people_arrived_for_license)
+        {
+            List<string> peopleList = people_arrived_for_license.Split(" ").ToList();
+            peopleList.Add(your_name);
+            peopleList.Sort();
+            int resultTime = 0;
+
+            int i = 0;
+            bool found = false;
+            
+            while (i < peopleList.Count && found == false)
+            {
+                
+                //Console.WriteLine("Group :");
+                int a = agents_available;
+                //Console.Write(peopleList[i]);
+                if (peopleList[i] == your_name)
+                {
+                    found = true;
+                }
+                resultTime += 20;
+                i++;
+                a--;
+
+
+
+
+                while (a > 0 && i < peopleList.Count && found == false)
+                {
+                    //Console.Write($" {peopleList[i]}");
+                    if (peopleList[i] == your_name)
+                    {
+                        resultTime += 20;
+                        found = true;
+                    }
+                    a -= 1;
+                    i += 1;
+                }
+                
+               
+            }
+            Console.WriteLine(resultTime);
+        }
         static void Main(string[] args)
         {
             //Console.WriteLine("Hello, World!");
-            CalculateTimeForLicenseProcessing("Eric", 2, "Adam Caroline Rebecca Frank");
-            CalculateTimeForLicenseProcessing("Zebediah", 1, "Bob Jim Becky Pat");
-            CalculateTimeForLicenseProcessing("Aaron", 3, "Jane Max Olivia Sam");
+            OptimisedCalculateTimeForLicenseProcessing("Eric", 2, "Adam Caroline Rebecca Frank");
+            OptimisedCalculateTimeForLicenseProcessing("Zebediah", 1, "Bob Jim Becky Pat");
+            OptimisedCalculateTimeForLicenseProcessing("Aaron", 3, "Jane Max Olivia Sam");
         }
     }
 }
